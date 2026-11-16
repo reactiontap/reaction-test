@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reaction Time Test Online: Visual, Sound and Target Modes</title>
+<meta name="description" content="Free reaction time test with three modes: react to a colour change, a sound or a moving target. Get your average in milliseconds, a rough percentile and a ruler-drop converter.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Reaction Time Test Online: Visual, Sound and Target Modes">
+<meta property="og:description" content="Test how fast you react to sight, sound and position, in milliseconds.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Albert+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What is a reaction time test?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A reaction time test measures the time between a signal, such as a colour change or a sound, and your response. Results are shown in milliseconds; most adults score between 200 and 300 ms on a visual online test."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why are there three modes?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Visual, Sound and Target modes test different things. Sound is usually fastest, Visual is the classic test, and Target adds finding and moving to a dot. Comparing the three shows where you are quickest."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is my sound score faster than my visual score?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The ear and hearing pathway process a simple sound in fewer steps than the eye processes light, so auditory reaction times are usually a few tens of milliseconds faster."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How accurate is the 'faster than' percentage?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It is a rough estimate based on a bell curve centred near 275 ms for the visual mode. Device delay, screen speed and the people being compared all change the real figure, so use it for fun."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How does the ruler drop test work?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A friend drops a ruler between your fingers and you catch it. The distance it fell gives your reaction time using time = √(2 × distance ÷ 9.81). Catching at 15 cm is about 175 ms."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is the fastest possible human reaction time?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "For simple reactions, around 100 ms is treated as the practical limit. That's why athletics counts any start faster than 0.100 seconds after the gun as a false start."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why did the test say 'Too soon'?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "You reacted before the signal. The waiting time is random, so an early tap is a guess. The round isn't counted and simply restarts."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is my data saved?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Your best average for each mode is saved only in your own browser so the scoreboard can show it next time. Nothing is uploaded, and the clear button removes it."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="notice">Independent fan-made test page · not an official website · scores are approximate</div>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a href="#" class="brand"><span class="b-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor"/></svg></span><span class="b-txt">Reaction Time Test</span></a>
+    <button class="hamb" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav" aria-label="Main"><a href="#lab">Start Test</a><a href="#science">The Science</a><a href="#faq">FAQ</a></nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-in">
+    <p class="chip">Reflex lab · 3 test modes</p>
+    <h1>Reaction Time Test Online: Sight, Sound and Target</h1>
+    <p class="lede">Most reaction time tests only check one thing: how fast you spot a colour change. This <a href="https://reactiontap.com/">Reaction Time Test</a> page goes a step further with three modes, so you can compare how quickly you react to something you see, something you hear and something that pops up in a new place. Every result is in milliseconds and stays in your browser.</p>
+    <div class="trace" aria-hidden="true"><svg viewBox="0 0 600 70" preserveAspectRatio="none"><polyline points="0,40 90,40 110,40 120,12 132,62 144,28 156,40 300,40 320,40 330,8 342,66 354,24 366,40 600,40" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></div>
+  </div>
+</section>
+
+<section class="lab" id="lab">
+  <div class="wrap">
+    <div class="console">
+      <div class="modes" role="tablist" aria-label="Test mode">
+        <button role="tab" data-m="visual" class="on" aria-selected="true"><b>Visual</b><span>colour change</span></button>
+        <button role="tab" data-m="sound" aria-selected="false"><b>Sound</b><span>beep</span></button>
+        <button role="tab" data-m="target" aria-selected="false"><b>Target</b><span>tap the dot</span></button>
+      </div>
+      <div class="arena" id="arena" tabindex="0" data-s="idle" aria-live="polite">
+        <div class="a-txt"><p class="a-big" id="aBig">Start visual test</p><p class="a-sm" id="aSm">Tap here, then react the moment the screen turns blue.</p></div>
+        <button class="dot" id="dot" type="button" aria-label="Target" hidden></button>
+        <div class="a-foot"><span id="aRound">Round 0 / 5</span><span id="aMode">Visual</span></div>
+      </div>
+      <div class="readout">
+        <div class="ro"><span>Last</span><b id="rLast">—</b></div>
+        <div class="ro"><span>Average</span><b id="rAvg">—</b></div>
+        <div class="ro"><span>Best</span><b id="rBest">—</b></div>
+        <div class="ro"><span>Faster than</span><b id="rPct">—</b></div>
+      </div>
+    </div>
+    <div class="board">
+      <h2>Your three-mode scoreboard</h2>
+      <p class="b-note">Your best 5-round average in each mode. Finish a test to fill a row.</p>
+      <table class="sb">
+        <thead><tr><th>Mode</th><th>Your best avg</th><th>Typical</th><th>Tests</th></tr></thead>
+        <tbody id="sb"></tbody>
+      </table>
+      <button class="clear" id="clr" type="button">Clear my scores</button>
+      <div class="ruler">
+        <h3>Ruler drop converter</h3>
+        <p>No screen? Have a friend drop a 30 cm ruler between your fingers and see where you catch it.</p>
+        <label for="cm">Caught at <output id="cmo">15</output> cm</label>
+        <input type="range" id="cm" min="1" max="30" step="0.5" value="15">
+        <p class="r-out">Reaction time: <b id="rms">175 ms</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="science">
+  <div class="wrap art">
+    <div class="toc"><p>On this page</p><a href="#s1">What it measures</a><a href="#s2">Sight vs sound</a><a href="#s3">Scores</a><a href="#s4">Ruler test</a><a href="#s5">Sport and driving</a><a href="#s6">Better scores</a></div>
+    <article>
+      <h2 id="s1">What a Reaction Time Test Really Measures</h2>
+      <p>A reaction time test times the gap between a signal and your response. In that short gap a lot happens: light or sound reaches your eye or ear, the signal travels along a nerve to the brain, the brain decides “that's it”, and a message runs down to the muscles in your hand. Then the device has to notice the tap and draw the result. Your score is the total of every step.</p>
+      <p>Because the brain's part is only a slice of the total, two people with the same reflexes can get different numbers on different phones or laptops. That's why the most useful way to read any reaction time test is to compare yourself with yourself, on the same device, over several days.</p>
+
+      <h2 id="s2">Sight vs Sound: Which Is Faster?</h2>
+      <p>Most people react faster to a sound than to a light. Hearing is processed in fewer steps than vision, so in lab studies simple auditory reaction times are often around 140–160 ms while visual times are closer to 180–200 ms. Online tests add device delay, so expect higher numbers here, but the gap between the Visual and Sound modes usually stays.</p>
+      <p>The Target mode is different again. The dot appears in a new place each round, so your eyes have to find it and your hand has to move to it. That makes it a mix of reaction time and aim, and scores of 350–450 ms are normal.</p>
+      <div class="cmp">
+        <div><p class="c-k">Visual</p><p class="c-v">~250 ms</p><p class="c-s">typical online result</p></div>
+        <div><p class="c-k">Sound</p><p class="c-v">~210 ms</p><p class="c-s">usually the fastest</p></div>
+        <div><p class="c-k">Target</p><p class="c-v">~400 ms</p><p class="c-s">reaction + movement</p></div>
+      </div>
+
+      <h2 id="s3">Reading Your Reaction Time Test Score</h2>
+      <p>The “faster than” figure on this page is a rough estimate. It compares your visual average with a bell curve centred on about 275 ms, which is close to what big online reaction time tests report for their users. Use it for fun, not as a medical or professional result.</p>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Visual average</th><th>Roughly faster than</th><th>How it feels</th></tr></thead>
+        <tbody>
+          <tr><td>180 ms</td><td>~96% of people</td><td>Pro-gamer territory</td></tr>
+          <tr><td>220 ms</td><td>~84%</td><td>Sharp and focused</td></tr>
+          <tr><td>250 ms</td><td>~68%</td><td>Quicker than most</td></tr>
+          <tr><td>275 ms</td><td>~50%</td><td>Right in the middle</td></tr>
+          <tr><td>320 ms</td><td>~21%</td><td>Tired or distracted</td></tr>
+          <tr><td>380 ms</td><td>~3%</td><td>Check your device, then rest</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 id="s4">The Ruler Drop Test (No Screen Needed)</h2>
+      <p>Long before online tests, coaches measured reflexes with a ruler. One person holds a 30 cm ruler at the top; the other waits with their thumb and finger open at the zero mark. The ruler is dropped without warning and caught as fast as possible. The distance it fell tells you the time, because a falling object always speeds up the same way: <b>time = √(2 × distance ÷ 9.81)</b>.</p>
+      <p>A catch at 10 cm means about 143 ms, 15 cm about 175 ms and 20 cm about 202 ms. The converter in the scoreboard does this maths for you. Do five drops and take the average, just like the online reaction time test.</p>
+
+      <h2 id="s5">Reaction Time in Sport and Driving</h2>
+      <p>Sprinting shows how seriously sport takes reaction time. In World Athletics races, a runner who reacts to the gun in less than 0.100 seconds is treated as having false-started, because a true reaction that quick is not considered possible. Top sprinters usually react in about 0.12–0.18 seconds.</p>
+      <p>Racing drivers wait for five red lights to go out, goalkeepers read a shot in a fraction of a second, and esports players rely on quick, steady reactions in every fight. On the road, safety guides allow much more time, often a second or more, because real drivers must notice a hazard, decide what to do and move their foot to the brake. A good reaction time test score does not mean you can follow closer to the car in front.</p>
+      <div class="more"><p class="m-t">Train beyond a single reaction</p><p>Fast reactions are only part of the picture. The <a href="https://reactiontap.com/aim-trainer/">Aim Trainer</a> asks you to hit targets quickly and accurately, much like the Target mode here, and the <a href="https://reactiontap.com/chimp-test/">Chimp Test</a> tests how many numbers you can remember in order. Mixing them with a reaction time test trains speed, aim and memory together.</p></div>
+
+      <h2 id="s6">How to Get Better Reaction Time Test Scores</h2>
+      <ul class="ticks">
+        <li><b>Get enough sleep.</b> Tiredness is the biggest reason scores slow down and become uneven.</li>
+        <li><b>Warm up.</b> Do one practice test and ignore it. Your second and third tests are more honest.</li>
+        <li><b>Reduce delay.</b> Use a wired mouse or keyboard, close heavy tabs and try a high refresh rate screen if you have one.</li>
+        <li><b>Look at the centre.</b> Keep your eyes on the middle of the test area so you don't have to search for the change.</li>
+        <li><b>Don't guess.</b> The wait is random. Early taps don't count, so trying to predict the signal only wastes rounds.</li>
+        <li><b>Track trends.</b> Test a few times a week at the same time of day and watch your average, not your single best.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="sec faq" id="faq">
+  <div class="wrap faq-in">
+    <h2>Reaction Time Test Questions</h2>
+    <details open><summary>What is a reaction time test?</summary><p>A reaction time test measures the time between a signal, such as a colour change or a sound, and your response. Results are shown in milliseconds; most adults score between 200 and 300 ms on a visual online test.</p></details>
+    <details><summary>Why are there three modes?</summary><p>Visual, Sound and Target modes test different things. Sound is usually fastest, Visual is the classic test, and Target adds finding and moving to a dot. Comparing the three shows where you are quickest.</p></details>
+    <details><summary>Why is my sound score faster than my visual score?</summary><p>The ear and hearing pathway process a simple sound in fewer steps than the eye processes light, so auditory reaction times are usually a few tens of milliseconds faster.</p></details>
+    <details><summary>How accurate is the &#x27;faster than&#x27; percentage?</summary><p>It is a rough estimate based on a bell curve centred near 275 ms for the visual mode. Device delay, screen speed and the people being compared all change the real figure, so use it for fun.</p></details>
+    <details><summary>How does the ruler drop test work?</summary><p>A friend drops a ruler between your fingers and you catch it. The distance it fell gives your reaction time using time = √(2 × distance ÷ 9.81). Catching at 15 cm is about 175 ms.</p></details>
+    <details><summary>What is the fastest possible human reaction time?</summary><p>For simple reactions, around 100 ms is treated as the practical limit. That&#x27;s why athletics counts any start faster than 0.100 seconds after the gun as a false start.</p></details>
+    <details><summary>Why did the test say &#x27;Too soon&#x27;?</summary><p>You reacted before the signal. The waiting time is random, so an early tap is a guess. The round isn&#x27;t counted and simply restarts.</p></details>
+    <details><summary>Is my data saved?</summary><p>Your best average for each mode is saved only in your own browser so the scoreboard can show it next time. Nothing is uploaded, and the clear button removes it.</p></details>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a href="#" class="brand"><span class="b-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor"/></svg></span><span class="b-txt">Reaction Time Test</span></a>
+    <p>An independent, fan-made reaction time test for fun and practice. It is not an official website of any brand. Results and percentiles are approximate, depend on your device and are not a medical, driving or professional assessment. Scores are saved only in your browser.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var arena=$('arena'), big=$('aBig'), sm=$('aSm'), dot=$('dot');
+  var ROUNDS=5, mode='visual', times=[], state='idle', t0=0, timer=null, ac=null, KEY='rtap2-scores';
+  var INFO={visual:{n:'Visual',start:'Start visual test',hint:'Tap here, then react the moment the screen turns blue.',wait:'Watch for blue…',typ:'~250 ms'},
+            sound:{n:'Sound',start:'Start sound test',hint:'Turn your sound on. Tap here, then react the moment you hear the beep.',wait:'Listen for the beep…',typ:'~210 ms'},
+            target:{n:'Target',start:'Start target test',hint:'Tap here, then tap the dot as soon as it appears.',wait:'Get ready…',typ:'~400 ms'}};
+  function avg(a){var s=0;a.forEach(function(x){s+=x;});return a.length?Math.round(s/a.length):0;}
+  function load(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return {};}}
+  function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+  function erf(x){var s=x<0?-1:1;x=Math.abs(x);var t=1/(1+0.3275911*x);var y=1-((((1.061405429*t-1.453152027)*t+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y;}
+  function faster(ms){ var z=(ms-275)/55; var p=Math.round((1-0.5*(1+erf(z/Math.SQRT2)))*100); return Math.max(1,Math.min(99,p)); }
+  function set(s,b,m){state=s;arena.setAttribute('data-s',s);big.textContent=b;sm.textContent=m;}
+  function readout(){
+    $('rLast').textContent=times.length?times[times.length-1]+' ms':'—';
+    $('rAvg').textContent=times.length?avg(times)+' ms':'—';
+    $('rBest').textContent=times.length?Math.min.apply(null,times)+' ms':'—';
+    $('rPct').textContent=(mode==='visual'&&times.length>=ROUNDS)?faster(avg(times))+'%':'—';
+    $('aRound').textContent='Round '+Math.min(times.length+(state==='wait'||state==='go'?1:0),ROUNDS)+' / '+ROUNDS;
+  }
+  function board(){
+    var o=load(), h='';
+    ['visual','sound','target'].forEach(function(m){ var r=o[m];
+      h+='<tr'+(m===mode?' class="cur"':'')+'><td>'+INFO[m].n+'</td><td>'+(r?'<b>'+r.best+' ms</b>':'—')+'</td><td>'+INFO[m].typ+'</td><td>'+(r?r.n:0)+'</td></tr>'; });
+    $('sb').innerHTML=h;
+  }
+  function beep(){
+    try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); if(ac.state==='suspended') ac.resume();
+      var o=ac.createOscillator(), g=ac.createGain(); o.frequency.value=880; o.type='square'; g.gain.value=0.15;
+      o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime+0.18); }catch(e){}
+  }
+  function idle(){ arena.setAttribute('data-m',mode); clearTimeout(timer); dot.hidden=true; times=[]; set('idle',INFO[mode].start,INFO[mode].hint); readout(); }
+  function arm(){
+    dot.hidden=true; set('wait',INFO[mode].wait,mode==='target'?'The dot can appear anywhere.':'Don\'t tap yet.'); readout();
+    if(mode==='sound'){ try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); if(ac.state==='suspended') ac.resume(); }catch(e){} }
+    timer=setTimeout(go,1500+Math.random()*3000);
+  }
+  function go(){
+    if(mode==='target'){
+      var w=arena.clientWidth, h=arena.clientHeight, d=56;
+      dot.style.left=Math.round(16+Math.random()*(w-d-32))+'px'; dot.style.top=Math.round(16+Math.random()*(h-d-60))+'px'; dot.hidden=false;
+      set('go','','');
+    } else if(mode==='sound'){ set('go','Listening…',''); beep(); }
+    else set('go','TAP!','');
+    t0=performance.now();
+  }
+  function record(){
+    var ms=Math.round(performance.now()-t0); times.push(ms); dot.hidden=true;
+    if(times.length>=ROUNDS){
+      var a=avg(times), o=load(), r=o[mode]||{best:a,n:0}; r.n++; if(a<r.best) r.best=a; o[mode]=r; save(o);
+      set('done',a+' ms average',(mode==='visual'?'Faster than about '+faster(a)+'% of people. ':'')+'Tap to test again.');
+      readout(); board(); return;
+    }
+    set('result',ms+' ms','Tap for round '+(times.length+1)+'.'); readout();
+  }
+  function hit(onDot){
+    if(state==='idle'||state==='done'){ if(state==='done'){ times=[]; } arm(); return; }
+    if(state==='wait'){ clearTimeout(timer); set('early','Too soon!','You reacted before the signal. Tap to retry this round.'); return; }
+    if(state==='go'){
+      if(mode==='target'&&!onDot){ clearTimeout(timer); dot.hidden=true; set('early','Missed!','Tap the dot itself. Tap to retry this round.'); return; }
+      record(); return;
+    }
+    if(state==='result'||state==='early') arm();
+  }
+  arena.addEventListener('pointerdown',function(e){ if(e.button>0) return; e.preventDefault(); hit(e.target===dot); });
+  arena.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); hit(true); } });
+  document.addEventListener('keydown',function(e){
+    if(e.code!=='Space'&&e.key!==' ') return; var tg=e.target.tagName;
+    if(tg==='INPUT'||tg==='BUTTON'||tg==='SUMMARY'||tg==='A') return;
+    var r=arena.getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return;
+    e.preventDefault(); if(!e.repeat) hit(true);
+  });
+  [].forEach.call(document.querySelectorAll('.modes button'),function(b){
+    b.addEventListener('click',function(){
+      [].forEach.call(document.querySelectorAll('.modes button'),function(x){x.classList.remove('on');x.setAttribute('aria-selected','false');});
+      b.classList.add('on'); b.setAttribute('aria-selected','true'); mode=b.dataset.m; $('aMode').textContent=INFO[mode].n; idle(); board(); b.blur();
+    });
+  });
+  $('clr').addEventListener('click',function(){ save({}); board(); this.blur(); });
+  var cm=$('cm');
+  function ruler(){ var d=+cm.value; $('cmo').textContent=d; $('rms').textContent=Math.round(Math.sqrt(2*d/100/9.81)*1000)+' ms'; }
+  cm.addEventListener('input',ruler);
+  var hb=document.querySelector('.hamb'), nav=document.querySelector('.nav');
+  hb.addEventListener('click',function(){ var o=nav.classList.toggle('open'); hb.setAttribute('aria-expanded',o); });
+  [].forEach.call(nav.querySelectorAll('a'),function(a){ a.addEventListener('click',function(){ nav.classList.remove('open'); hb.setAttribute('aria-expanded','false'); }); });
+  idle(); board(); ruler();
+})();
+
+</script>
+</body>
+</html>
